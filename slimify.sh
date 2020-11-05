@@ -15,6 +15,7 @@ mkdir -p dist
 
     echo "slimming wheels for pandas version ${NUMPY_VERSION}"
     
+    $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux1_x86_64 pandas==${PANDAS_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux1_x86_64 pandas==${PANDAS_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux1_x86_64 pandas==${PANDAS_VERSION}
     #$PIP_DOWNLOAD_CMD --python-version 3.6 --platform manylinux1_x86_64 pandas==${PANDAS_VERSION}
@@ -33,7 +34,7 @@ mkdir -p dist
     done
 
     pip uninstall -y --disable-pip-version-check pandas
-    pip install --disable-pip-version-check pandas -f . --index-url https://westonsteimel.github.io/pypi-repo --extra-index-url https://pypi.org/pypi
+    pip install --disable-pip-version-check pandas==${PANDAS_VERSION} -f . --index-url https://westonsteimel.github.io/pypi-repo --extra-index-url https://pypi.org/pypi
 
     python -c "
 import importlib
