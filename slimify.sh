@@ -2,6 +2,8 @@
 
 set -e
 
+pip install -U pip==20.2.4
+
 PIP_DOWNLOAD_CMD="pip download --no-deps --disable-pip-version-check"
 
 mkdir -p dist
@@ -18,7 +20,6 @@ mkdir -p dist
     $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux1_x86_64 pandas==${PANDAS_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux1_x86_64 pandas==${PANDAS_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux1_x86_64 pandas==${PANDAS_VERSION}
-    #$PIP_DOWNLOAD_CMD --python-version 3.6 --platform manylinux1_x86_64 pandas==${PANDAS_VERSION}
 
     for filename in ./*.whl
     do
@@ -34,7 +35,11 @@ mkdir -p dist
     done
 
     pip uninstall -y --disable-pip-version-check pandas
-    pip install --disable-pip-version-check pandas==${PANDAS_VERSION} -f . --index-url https://westonsteimel.github.io/pypi-repo --extra-index-url https://pypi.org/pypi
+    pip install \
+        --disable-pip-version-check pandas==${PANDAS_VERSION} \
+        -f . \
+        --index-url https://westonsteimel.github.io/pypi-repo \
+        --extra-index-url https://pypi.org/pypi
 
     python -c "
 import importlib
