@@ -15,7 +15,7 @@ mkdir -p dist
         PANDAS_VERSION=$(pip search pandas | pcregrep -o1 -e "^pandas \((.*)\).*$")
     fi
 
-    echo "slimming wheels for pandas version ${NUMPY_VERSION}"
+    echo "slimming wheels for pandas version ${PANDAS_VERSION}"
     
     $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux1_x86_64 pandas==${PANDAS_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux1_x86_64 pandas==${PANDAS_VERSION}
