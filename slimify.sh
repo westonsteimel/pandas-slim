@@ -12,7 +12,8 @@ mkdir -p dist
     cd dist
 
     if [[ -z "${PANDAS_VERSION}" ]]; then
-        PANDAS_VERSION=$(pip search pandas | pcregrep -o1 -e "^pandas \((.*)\).*$")
+        echo "Set the PANDAS_VERSION environment variable."
+        exit 1
     fi
 
     echo "slimming wheels for pandas version ${PANDAS_VERSION}"
