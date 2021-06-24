@@ -3,7 +3,7 @@
 # the lowest supported python version (currently 3.7) so we use that as base
 # image
 
-FROM python:3.7-slim
+FROM ghcr.io/westonsteimel/python:3.7-slim-bullseye
 
 RUN apt update \
     && apt install -y \
@@ -15,5 +15,6 @@ RUN apt update \
 WORKDIR /build
 
 COPY slimify.sh /build/
+COPY test.py /build
 
 CMD ["/build/slimify.sh"]

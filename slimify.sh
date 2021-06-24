@@ -31,6 +31,7 @@ mkdir -p dist
 
         wheel unpack $filename
         find pandas-${PANDAS_VERSION}/ -name "*.so" | xargs strip
+        rm $filename
         wheel pack pandas-${PANDAS_VERSION}
 
         rm -r pandas-${PANDAS_VERSION}
@@ -38,15 +39,9 @@ mkdir -p dist
 
     pip uninstall -y --disable-pip-version-check pandas
     pip install \
-        --disable-pip-version-check pandas==${PANDAS_VERSION} \
-        -f . \
-        --index-url https://westonsteimel.github.io/pypi-repo
-
-    python -c "
-import importlib
-import pandas as pd
-
-module = importlib.import_module('pandas')
-print(module.__version__)
-"
+        --disable-pip-version-check \
+        --index-url https://westonsteimel.github.io/pypi-repo \
+        "pandas-${PANDAS_VERSION}-cp37-cp37m-manylinux1_x86_64.manylinux_2_5_x86_64.whl"
 )
+
+python test.py
