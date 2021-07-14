@@ -27,7 +27,7 @@ mkdir -p dist
     do
         zip -d ${filename} \
             \*tests/\* \
-            \*testing/\*
+            \*/\conftest.py
 
         wheel unpack $filename
         find pandas-${PANDAS_VERSION}/ -name "*.so" | xargs strip
