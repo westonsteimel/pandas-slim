@@ -16,12 +16,12 @@ mkdir -p dist
 
     echo "slimming wheels for pandas version ${PANDAS_VERSION}"
     
-    $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux1_x86_64 pandas==${PANDAS_VERSION}
-    $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux1_x86_64 pandas==${PANDAS_VERSION}
-    
+    $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux2014_x86_64 pandas==${PANDAS_VERSION}
+    $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2014_x86_64 pandas==${PANDAS_VERSION}
+
     # We can't specify `--python-version` for the 3.7 version because there is some strange bug which prevents
     # it from finding the latest version of pandas in this case
-    $PIP_DOWNLOAD_CMD --platform manylinux1_x86_64 pandas==${PANDAS_VERSION}
+    $PIP_DOWNLOAD_CMD --platform manylinux2014_x86_64 pandas==${PANDAS_VERSION}
 
     for filename in ./*.whl
     do
@@ -41,7 +41,7 @@ mkdir -p dist
     pip install \
         --disable-pip-version-check \
         --index-url https://westonsteimel.github.io/pypi-repo \
-        "pandas-${PANDAS_VERSION}-cp37-cp37m-manylinux1_x86_64.manylinux_2_5_x86_64.whl"
+        "pandas-${PANDAS_VERSION}-cp37-cp37m-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
 )
 
 python test.py
