@@ -5,6 +5,9 @@
 
 FROM ghcr.io/westonsteimel/python:3.7-slim-bullseye
 
+ARG TARGETPLATFORM
+ENV TARGETPLATFORM="${TARGETPLATFORM}"
+
 RUN apt update \
     && apt install -y \
     zip \
