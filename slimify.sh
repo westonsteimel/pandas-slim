@@ -17,6 +17,7 @@ mkdir -p dist
     echo "slimming wheels for pandas version ${PANDAS_VERSION}"
     
     if [ $TARGETPLATFORM == "linux/amd64" ]; then
+        $PIP_DOWNLOAD_CMD --python-version 3.10 --platform manylinux2014_x86_64 pandas==${PANDAS_VERSION}
         $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux2014_x86_64 pandas==${PANDAS_VERSION}
         $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2014_x86_64 pandas==${PANDAS_VERSION}
 
@@ -24,8 +25,9 @@ mkdir -p dist
         # it from finding the latest version of pandas in this case
         $PIP_DOWNLOAD_CMD --platform manylinux2014_x86_64 pandas==${PANDAS_VERSION}
     elif [ $TARGETPLATFORM == "linux/aarch64" ]; then
+        $PIP_DOWNLOADS_CMD --python-version 3.10 --platform manylinux_2014_aarch64 pandas==${PANDAS_VERSION}
         $PIP_DOWNLOADS_CMD --python-version 3.9 --platform manylinux_2014_aarch64 pandas==${PANDAS_VERSION}
-        $PIP_DOWNLOADS_CMD --python-version 3.9 --platform manylinux_2014_aarch64 pandas==${PANDAS_VERSION}
+        $PIP_DOWNLOADS_CMD --python-version 3.8 --platform manylinux_2014_aarch64 pandas==${PANDAS_VERSION}
         $PIP_DOWNLOAD_CMD --platform manylinux2014_aarch64 pandas==${PANDAS_VERSION}
     else
         echo "${TARGETPLATFORM} not currently supported."
